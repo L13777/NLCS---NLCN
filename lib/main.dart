@@ -10,32 +10,44 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'D Learning',
-      theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: Colors.cyan,
-          // brightness: Brightness.dark,
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("D Learning"),
+          backgroundColor: const Color.fromARGB(255, 160, 212, 255),
+          // elevation: 0,
+          actions: [
+            IconButton(
+                onPressed: () {
+                  print("search funtion");
+                },
+                icon: Icon(Icons.search)),
+            IconButton(
+              onPressed: () {
+                print("Go to user background");
+              },
+              icon: Icon(Icons.account_circle_outlined),
+            ),
+          ],
         ),
-      ),
-      darkTheme: ThemeData.dark(),
-      home: const MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('D Learning'),
-        backgroundColor: Theme.of(context).colorScheme.primary,
-      ),
-      body: const Center(
-        child: Text('New project created'),
+        drawer: Drawer(
+          backgroundColor: Color.fromARGB(255, 91, 195, 230),
+          child: Column(
+            children: [
+              DrawerHeader(
+                child: Icon(
+                  Icons.favorite,
+                ),
+              ),
+              ListTile(
+                leading: Icon(Icons.home),
+                title: Text("H O M E"),
+                onTap: () {},
+              ),
+            ],
+          ),
+        ),
+        backgroundColor: Color.fromARGB(255, 230, 225, 255),
       ),
     );
   }
