@@ -38,7 +38,7 @@ class _CalendarPageState extends State<CalendarPage> {
           textAlign: TextAlign.center,
           backgroundColor: Color.fromARGB(255, 198, 167, 251),
           textStyle: TextStyle(
-            color: Colors.black,
+            color: Color.fromARGB(255, 0, 42, 255),
           ),
         ),
         headerDateFormat: 'd / MMMM / y',
@@ -67,20 +67,6 @@ class _CalendarPageState extends State<CalendarPage> {
     }
   }
 
-  // _AppointmentDataSource _getDataSource() {
-  //   List<Appointment> appointments = <Appointment>[];
-  //   appointments.add(Appointment(
-  //     startTime: DateTime.now(),
-  //     endTime: DateTime.now().add(Duration(minutes: 10)),
-  //     subject: 'Meeting',
-  //     color: Colors.blue,
-  //     startTimeZone: '',
-  //     endTimeZone: '',
-  //   ));
-
-  //   return _AppointmentDataSource(appointments);
-  // }
-
   // void initState() {
   //   super.initState();
   //   _fetchAndSortCourses();
@@ -96,28 +82,89 @@ class _CalendarPageState extends State<CalendarPage> {
   //   });
   // }
 
-  // // Hàm để tạo data source cho lịch trình
+  // Hàm tính thời gian bắt đầu cho ngày trong tuần
+  // DateTime _getStartTime(DateTime month, int dayOfWeek, TimeOfDay startTime) {
+  //   DateTime dateTime =
+  //       DateTime(month.year, month.month, 1); // Ngày đầu tiên của tháng
+  //   while (dateTime.weekday != dayOfWeek) {
+  //     dateTime = dateTime.add(Duration(days: 1));
+  //   }
+  //   return DateTime(dateTime.year, dateTime.month, dateTime.day, startTime.hour,
+  //       startTime.minute);
+  // }
+
+  // Hàm tính thời gian kết thúc cho ngày trong tuần
+  // DateTime _getEndTime(DateTime month, int dayOfWeek, TimeOfDay endTime) {
+  //   DateTime dateTime =
+  //       DateTime(month.year, month.month, 1); // Ngày đầu tiên của tháng
+  //   while (dateTime.weekday != dayOfWeek) {
+  //     dateTime = dateTime.add(Duration(days: 1));
+  //   }
+  //   return DateTime(dateTime.year, dateTime.month, dateTime.day, endTime.hour,
+  //       endTime.minute);
+  // }
+
+  DateTime _getDateTimeForWeekday(
+      DateTime weekStart, int dayOfWeek, TimeOfDay timeOfDay) {
+    DateTime dateTime = weekStart;
+    while (dateTime.weekday != dayOfWeek) {
+      dateTime = dateTime.add(Duration(days: 1));
+    }
+    return DateTime(dateTime.year, dateTime.month, dateTime.day, timeOfDay.hour,
+        timeOfDay.minute);
+  }
+
+  // Hàm để tạo data source cho lịch trình
   _AppointmentDataSource _getDataSource(List<Course> courses) {
     List<Appointment> appointments = <Appointment>[];
-    for (var course in courses) {
-      Duration startTimeDuration = Duration(
-          hours: course.startTime.hour, minutes: course.startTime.minute);
-      Duration endTimeDuration =
-          Duration(hours: course.endTime.hour, minutes: course.endTime.minute);
-      // Tạo một Appointment từ thông tin của mỗi Course
-      Appointment appointment = Appointment(
-        startTime: DateTime.now()
-            .subtract(Duration(
-                days: DateTime.now().weekday - course.daysOfWeek.first))
-            .add(startTimeDuration), // Thời gian bắt đầu
-        endTime: DateTime.now()
-            .subtract(Duration(
-                days: DateTime.now().weekday - course.daysOfWeek.first))
-            .add(endTimeDuration), // Thời gian kết thúc
-        subject: course.title, // Tên môn học làm tiêu đề
-        color: Colors.blue, // Màu sắc của appointment
-      );
-      appointments.add(appointment);
+    DateTime now = DateTime.now();
+    DateTime threeMonthsLater = now.add(Duration(days: 30 * 3));
+
+    // Tạo một map để lưu các khóa học trong từng ngày cụ thể để kiểm tra trùng lặp
+    Map<DateTime, List<Course>> schedule = {};
+
+    for (DateTime weekStart = now;
+        weekStart.isBefore(threeMonthsLater);
+        weekStart = weekStart.add(Duration(days: 7))) {
+      for (var course in courses) {
+        for (var dayOfWeek in course.daysOfWeek) {
+          DateTime startTime =
+              _getDateTimeForWeekday(weekStart, dayOfWeek, course.startTime);
+          DateTime endTime =
+              _getDateTimeForWeekday(weekStart, dayOfWeek, course.endTime);
+
+          bool hasConflict = false;
+          schedule[startTime] ??= [];
+          for (var scheduledCourse in schedule[startTime]!) {
+            DateTime scheduledStartTime = _getDateTimeForWeekday(
+                weekStart, dayOfWeek, scheduledCourse.startTime);
+            DateTime scheduledEndTime = _getDateTimeForWeekday(
+                weekStart, dayOfWeek, scheduledCourse.endTime);
+
+            if (startTime.isBefore(scheduledEndTime) &&
+                endTime.isAfter(scheduledStartTime)) {
+              hasConflict = true;
+              break;
+            }
+          }
+          // Tính thời gian bắt đầu và kết thúc cho ngày trong tuần này
+          // DateTime startTime =
+          //     _getStartTime(month, dayOfWeek, course.startTime);
+          // DateTime endTime = _getEndTime(month, dayOfWeek, course.endTime);
+
+          Color appointmentColor = hasConflict ? Colors.red : Colors.blue;
+          // Tạo một Appointment và thêm vào danh sách
+          Appointment appointment = Appointment(
+            startTime: startTime,
+            endTime: endTime,
+            subject: course.title,
+            color: appointmentColor,
+          );
+
+          schedule[startTime]!.add(course);
+          appointments.add(appointment);
+        }
+      }
     }
     return _AppointmentDataSource(appointments);
   }

@@ -8,6 +8,9 @@ class UserTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String backgroundUrl = user.bgImageUrl.isNotEmpty
+        ? user.bgImageUrl
+        : 'https://th.bing.com/th/id/OIG3.FWWgOw5WVrFMYEyGCag1?pid=ImgGn';
     return Scaffold(
       appBar: AppBar(
         title: Text('User Profile'),
@@ -18,7 +21,7 @@ class UserTile extends StatelessWidget {
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: NetworkImage(
-                  user.bgImageUrl,
+                  backgroundUrl,
                 ),
                 fit: BoxFit.cover,
               ),
@@ -30,7 +33,7 @@ class UserTile extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  color: Colors.blue,
+                  color: Colors.transparent,
                   child: Padding(
                     padding: EdgeInsets.all(10),
                     child: Column(
@@ -39,7 +42,9 @@ class UserTile extends StatelessWidget {
                         CircleAvatar(
                           radius: 50,
                           backgroundImage: NetworkImage(
-                            'https://th.bing.com/th/id/OIG3.FWWgOw5WVrFMYEyGCag1?pid=ImgGn',
+                            user.avatarImageUrl.isNotEmpty
+                                ? user.avatarImageUrl
+                                : 'https://th.bing.com/th/id/OIG3.FWWgOw5WVrFMYEyGCag1?pid=ImgGn',
                           ),
                         ),
                       ],

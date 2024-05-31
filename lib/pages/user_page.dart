@@ -8,8 +8,23 @@ class UserPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final usersmanager = UsersManager();
-    final List<User> user = usersmanager.accounts;
-    return UserTile(user as User);
+    final usersManager = UsersManager();
+    final List<User> users = usersManager.accounts;
+
+    if (users.isEmpty) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('User Profile'),
+        ),
+        body: Center(
+          child: Text('No users available'),
+        ),
+      );
+    }
+
+    final User user = users
+        .first; // Lấy người dùng đầu tiên hoặc thay đổi logic để lấy người dùng cụ thể
+
+    return UserTile(user);
   }
 }

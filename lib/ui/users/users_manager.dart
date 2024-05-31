@@ -6,7 +6,8 @@ class UsersManager {
       name: 'Linh',
       description: 'A newbie learn Information Technology',
       avatarImageUrl: '',
-      bgImageUrl: '',
+      bgImageUrl:
+          'https://th.bing.com/th/id/OIG3.FWWgOw5WVrFMYEyGCag1?pid=ImgGn',
       role: 'student',
     ),
   ];
