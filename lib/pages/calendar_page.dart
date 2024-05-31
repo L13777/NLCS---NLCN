@@ -82,28 +82,6 @@ class _CalendarPageState extends State<CalendarPage> {
   //   });
   // }
 
-  // Hàm tính thời gian bắt đầu cho ngày trong tuần
-  // DateTime _getStartTime(DateTime month, int dayOfWeek, TimeOfDay startTime) {
-  //   DateTime dateTime =
-  //       DateTime(month.year, month.month, 1); // Ngày đầu tiên của tháng
-  //   while (dateTime.weekday != dayOfWeek) {
-  //     dateTime = dateTime.add(Duration(days: 1));
-  //   }
-  //   return DateTime(dateTime.year, dateTime.month, dateTime.day, startTime.hour,
-  //       startTime.minute);
-  // }
-
-  // Hàm tính thời gian kết thúc cho ngày trong tuần
-  // DateTime _getEndTime(DateTime month, int dayOfWeek, TimeOfDay endTime) {
-  //   DateTime dateTime =
-  //       DateTime(month.year, month.month, 1); // Ngày đầu tiên của tháng
-  //   while (dateTime.weekday != dayOfWeek) {
-  //     dateTime = dateTime.add(Duration(days: 1));
-  //   }
-  //   return DateTime(dateTime.year, dateTime.month, dateTime.day, endTime.hour,
-  //       endTime.minute);
-  // }
-
   DateTime _getDateTimeForWeekday(
       DateTime weekStart, int dayOfWeek, TimeOfDay timeOfDay) {
     DateTime dateTime = weekStart;
@@ -147,18 +125,13 @@ class _CalendarPageState extends State<CalendarPage> {
               break;
             }
           }
-          // Tính thời gian bắt đầu và kết thúc cho ngày trong tuần này
-          // DateTime startTime =
-          //     _getStartTime(month, dayOfWeek, course.startTime);
-          // DateTime endTime = _getEndTime(month, dayOfWeek, course.endTime);
 
-          Color appointmentColor = hasConflict ? Colors.red : Colors.blue;
           // Tạo một Appointment và thêm vào danh sách
           Appointment appointment = Appointment(
             startTime: startTime,
             endTime: endTime,
             subject: course.title,
-            color: appointmentColor,
+            color: hasConflict ? Colors.red : Colors.blue,
           );
 
           schedule[startTime]!.add(course);
