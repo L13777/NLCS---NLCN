@@ -1,6 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:learning_app/models/course.dart';
+import 'package:learning_app/pages/main_page.dart';
+
+// import 'package:supertokens_flutter/supertokens.dart';
+
+// import 'package:supertokens_flutter/http.dart' as http;
+
+// //Kiểm tra session có tổn tại không
+// Future<bool> doesSessionExist() async {
+//   return await SuperTokens.doesSessionExist();
+// }
+
+// //Sử dụng với http, các yêu cầu mạng
+// Future<void> makeRequest() async {
+//   Uri uri = Uri.parse("http://localhost:3000/api");
+
+//   var response = await http.get(uri);
+// }
+
+// // Đăng xuất
+// Future<void> signOut() async {
+//   await SuperTokens.signOut();
+// }
+
+// // Lấy Id người dùng
+// Future<String> getUserId() async {
+//   return await SuperTokens.getUserId();
+// }
+
+// // Làm mới session thủ công
+// Future<void> manualRefresh() async {
+//   // Returns true if session was refreshed, false if session is expired
+//   var success = await SuperTokens.attemptRefreshingSession();
+// }
 
 void main() {
+  // Khởi tạo sdk
+  // SuperTokens.init(
+  //   apiDomain: "http://localhost:8080",
+  //   apiBasePath: "/auth",
+  //   // webDomain: "http://localhost:3000"
+  // );
+
   runApp(const MyApp());
 }
 
@@ -11,43 +52,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("D Learning"),
-          backgroundColor: const Color.fromARGB(255, 160, 212, 255),
-          // elevation: 0,
-          actions: [
-            IconButton(
-                onPressed: () {
-                  print("search funtion");
-                },
-                icon: Icon(Icons.search)),
-            IconButton(
-              onPressed: () {
-                print("Go to user background");
-              },
-              icon: Icon(Icons.account_circle_outlined),
-            ),
-          ],
-        ),
-        drawer: Drawer(
-          backgroundColor: Color.fromARGB(255, 91, 195, 230),
-          child: Column(
-            children: [
-              DrawerHeader(
-                child: Icon(
-                  Icons.favorite,
-                ),
-              ),
-              ListTile(
-                leading: Icon(Icons.home),
-                title: Text("H O M E"),
-                onTap: () {},
-              ),
-            ],
-          ),
-        ),
-        backgroundColor: Color.fromARGB(255, 230, 225, 255),
+      home: MainPage(
+        course: Course,
       ),
     );
   }
