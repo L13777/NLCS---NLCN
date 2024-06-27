@@ -108,7 +108,7 @@ class CourseTile extends StatelessWidget {
                           print('đổi màu icon và lưu trữ');
                         },
                         icon: Icon(
-                          Icons.book_outlined,
+                          Icons.star_border_outlined,
                         ),
                       ),
                     ),

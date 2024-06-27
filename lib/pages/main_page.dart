@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:learning_app/pages/home_page.dart';
 import 'package:learning_app/pages/search_page.dart';
 import 'package:learning_app/pages/calendar_page.dart';
+import 'package:learning_app/pages/task_page.dart';
 import 'package:learning_app/pages/user_page.dart';
 
 class MainPage extends StatefulWidget {
@@ -16,6 +17,7 @@ class _MainPageState extends State<MainPage> {
   final List<Widget> _pages = [
     HomePage(),
     SearchPage(),
+    TaskPage(),
     CalendarPage(),
     UserPage(),
   ];
@@ -70,8 +72,8 @@ class _MainPageState extends State<MainPage> {
           ),
         ),
         bottomNavigationBar: BottomNavigationBar(
-          fixedColor: Colors.black,
-          unselectedItemColor: Colors.red,
+          fixedColor: Colors.purple,
+          unselectedItemColor: Color.fromARGB(255, 13, 0, 195),
           items: const <BottomNavigationBarItem>[
             // home_page
             BottomNavigationBarItem(
@@ -87,6 +89,14 @@ class _MainPageState extends State<MainPage> {
                 Icons.search,
               ),
               label: 'Search',
+            ),
+
+            // task_page
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.task_alt,
+              ),
+              label: 'Mission',
             ),
 
             // calendar_page

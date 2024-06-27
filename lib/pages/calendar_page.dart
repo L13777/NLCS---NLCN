@@ -38,7 +38,7 @@ class _CalendarPageState extends State<CalendarPage> {
           textAlign: TextAlign.center,
           backgroundColor: Color.fromARGB(255, 198, 167, 251),
           textStyle: TextStyle(
-            color: Color.fromARGB(255, 0, 42, 255),
+            color: Color.fromARGB(255, 13, 0, 195),
           ),
         ),
         headerDateFormat: 'd / MMMM / y',
@@ -112,8 +112,13 @@ class _CalendarPageState extends State<CalendarPage> {
               _getDateTimeForWeekday(weekStart, dayOfWeek, course.endTime);
 
           bool hasConflict = false;
-          schedule[startTime] ??= [];
-          for (var scheduledCourse in schedule[startTime]!) {
+          DateTime scheduleKey = DateTime(
+            startTime.year,
+            startTime.month,
+            startTime.day,
+          );
+          schedule[scheduleKey] ??= [];
+          for (var scheduledCourse in schedule[scheduleKey]!) {
             DateTime scheduledStartTime = _getDateTimeForWeekday(
                 weekStart, dayOfWeek, scheduledCourse.startTime);
             DateTime scheduledEndTime = _getDateTimeForWeekday(
@@ -134,7 +139,7 @@ class _CalendarPageState extends State<CalendarPage> {
             color: hasConflict ? Colors.red : Colors.blue,
           );
 
-          schedule[startTime]!.add(course);
+          schedule[scheduleKey]!.add(course);
           appointments.add(appointment);
         }
       }

@@ -8,9 +8,6 @@ class UserTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String backgroundUrl = user.bgImageUrl.isNotEmpty
-        ? user.bgImageUrl
-        : 'https://th.bing.com/th/id/OIG3.FWWgOw5WVrFMYEyGCag1?pid=ImgGn';
     return Scaffold(
       appBar: AppBar(
         title: Text('User Profile'),
@@ -18,38 +15,44 @@ class UserTile extends StatelessWidget {
       body: Column(
         children: [
           Container(
+            height: 120,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: NetworkImage(
-                  backgroundUrl,
-                ),
+                image: user.bgImageUrl.isNotEmpty
+                    ? NetworkImage(
+                        'https://th.bing.com/th/id/OIG3.FWWgOw5WVrFMYEyGCag1?pid=ImgGn',
+                      )
+                    : AssetImage(user.bgImageUrl) as ImageProvider<Object>,
                 fit: BoxFit.cover,
               ),
             ),
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Card(
                   elevation: 4,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(50),
                   ),
                   color: Colors.transparent,
+                  // color: Colors.white,
                   child: Padding(
-                    padding: EdgeInsets.all(10),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        CircleAvatar(
-                          radius: 50,
-                          backgroundImage: NetworkImage(
-                            user.avatarImageUrl.isNotEmpty
-                                ? user.avatarImageUrl
-                                : 'https://th.bing.com/th/id/OIG3.FWWgOw5WVrFMYEyGCag1?pid=ImgGn',
-                          ),
-                        ),
-                      ],
+                    padding: EdgeInsets.all(1),
+                    child: CircleAvatar(
+                      radius: 40,
+                      backgroundImage: user.avatarImageUrl.isNotEmpty
+                          ? NetworkImage(
+                              'https://th.bing.com/th/id/OIG3.FWWgOw5WVrFMYEyGCag1?pid=ImgGn',
+                            )
+                          : AssetImage('assets/images/UDBG2.jpg'
+                              // user.avatarImageUrl
+                              ) as ImageProvider<Object>,
                     ),
                   ),
+                ),
+                Text(
+                  user.name,
+                  style: TextStyle(color: Colors.white),
                 ),
               ],
             ),

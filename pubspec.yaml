@@ -30,3 +30,6 @@ flutter:
 
   assets:
     - assets/
+    - assets/images/
+    - assets/images/UDBG.jpg
+    - assets/images/userdefaultbg.jpg

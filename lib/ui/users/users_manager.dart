@@ -4,10 +4,9 @@ class UsersManager {
   final List<User> _accounts = [
     User(
       name: 'Linh',
-      description: 'A newbie learn Information Technology',
+      description: 'A newbie learning Information Technology',
       avatarImageUrl: '',
-      bgImageUrl:
-          'https://th.bing.com/th/id/OIG3.FWWgOw5WVrFMYEyGCag1?pid=ImgGn',
+      bgImageUrl: 'assets/images/UDBG.jpg',
       role: 'student',
     ),
   ];
