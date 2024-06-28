@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-class TagTile extends StatelessWidget {
-  final String taskName;
-  final bool taskCompleted;
-  Function(bool?)? onChanged;
-  Function(BuildContext)? deleteFunction;
+import '../../../models/task.dart';
+
+class TaskTile extends StatelessWidget {
+  final Function(bool?)? onChanged;
+  final Function(BuildContext)? deleteFunction;
 
   // const
-  TagTile({
+  TaskTile({
     super.key,
-    required this.taskName,
-    required this.taskCompleted,
     required this.onChanged,
     required this.deleteFunction,
+    required this.task,
   });
+
+  final Task task;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class TagTile extends StatelessWidget {
       padding: EdgeInsets.only(left: 25, right: 25, top: 25),
       child: GestureDetector(
         onTap: () {
-          onChanged?.call(!taskCompleted);
+          onChanged?.call(!task.isCompleted);
           // tích vô checkbox khi bấm vào hình
         },
         child: Slidable(
@@ -37,9 +37,14 @@ class TagTile extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.all(12),
             decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/UDBG.jpg'),
-                fit: BoxFit.cover,
+              gradient: LinearGradient(
+                colors: [Color(0xFF00FFFF), Color(0xFFBF00FF)],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                transform:
+                    GradientRotation(0.785398), // cho hướng xéo xéo / 45deg
+                stops: [0.15, 0.7],
+                /* 1.0 là 100%, cáo đầu là màu đầu bắt đầu từ đâu */
               ),
               borderRadius: BorderRadius.circular(12),
             ),
@@ -48,21 +53,22 @@ class TagTile extends StatelessWidget {
                 padding: EdgeInsets.only(right: 8),
                 width: 270,
                 child: Text(
-                  taskName,
+                  // (phiếu đánh giá, phiếu giao việc, phiếu giới thiệu kèm vô báo cáo ghi họ tên sinh viên, mssv,) phiếu theo dõi, phiếu chấm điểm là bí mật
+                  task.name,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: Colors.white,
-                    decoration: taskCompleted
+                    decoration: task.isCompleted
                         ? TextDecoration.lineThrough
                         : TextDecoration.none,
-                    decorationThickness: taskCompleted ? 2 : null,
-                    decorationColor: taskCompleted ? Colors.white : null,
+                    decorationThickness: task.isCompleted ? 2 : null,
+                    decorationColor: task.isCompleted ? Colors.white : null,
                   ),
                 ),
               ),
               Checkbox(
-                value: taskCompleted,
+                value: task.isCompleted,
                 onChanged: onChanged,
                 activeColor: Colors.white,
                 checkColor: Color.fromARGB(255, 198, 167, 251),

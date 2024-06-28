@@ -1,5 +1,5 @@
 class User {
-  final String? id;
+  final String? uid;
   final String name;
   final String description;
   final String avatarImageUrl;
@@ -7,7 +7,7 @@ class User {
   final String role;
 
   User({
-    this.id,
+    this.uid,
     required this.name,
     required this.description,
     required this.avatarImageUrl,
@@ -16,7 +16,7 @@ class User {
   });
 
   User copyWith({
-    String? id,
+    String? uid,
     String? name,
     String? description,
     String? avatarImageUrl,
@@ -24,7 +24,7 @@ class User {
     String? role,
   }) {
     return User(
-      id: id ?? this.id,
+      uid: uid ?? this.uid,
       name: name ?? this.name,
       description: description ?? this.description,
       avatarImageUrl: avatarImageUrl ?? this.avatarImageUrl,

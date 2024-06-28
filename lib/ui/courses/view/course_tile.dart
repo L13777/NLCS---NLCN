@@ -25,7 +25,13 @@ class CourseTile extends StatelessWidget {
             Container(
               margin: EdgeInsets.only(bottom: 5),
               decoration: BoxDecoration(
-                color: Colors.black,
+                gradient: LinearGradient(
+                  colors: [Color(0xFF00FFFF), Color(0xFFBF00FF)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  transform: GradientRotation(0.785398),
+                  stops: [0.15, 0.7],
+                ),
                 borderRadius: BorderRadius.circular(4),
               ),
               height: 120,

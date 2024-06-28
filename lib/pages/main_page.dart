@@ -72,8 +72,8 @@ class _MainPageState extends State<MainPage> {
           ),
         ),
         bottomNavigationBar: BottomNavigationBar(
-          fixedColor: Colors.purple,
-          unselectedItemColor: Color.fromARGB(255, 13, 0, 195),
+          fixedColor: Color(0xFFFF69B4),
+          unselectedItemColor: Color(0xFFBF00FF),
           items: const <BottomNavigationBarItem>[
             // home_page
             BottomNavigationBarItem(

@@ -3,16 +3,17 @@ import 'package:flutter/material.dart';
 import '../../../util/button.dart';
 
 class DialogBox extends StatelessWidget {
-  final controller;
-  VoidCallback onSaved;
-  VoidCallback onCancel;
+  final TextEditingController controller;
+  final VoidCallback onSaved;
+  final VoidCallback onCancel;
 
   // const
-  DialogBox(
-      {super.key,
-      required this.controller,
-      required this.onSaved,
-      required this.onCancel});
+  DialogBox({
+    super.key,
+    required this.controller,
+    required this.onSaved,
+    required this.onCancel,
+  });
 
   @override
   Widget build(BuildContext context) {
