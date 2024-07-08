@@ -12,7 +12,20 @@ class CourseDetailPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(course.title),
       ),
-      body: Text('Đây là hiển thị chi tiết'),
+      body: Container(
+        height: 120,
+        padding: EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: course.imageUrl.isNotEmpty
+                ? NetworkImage(
+                    'https://th.bing.com/th/id/OIG3.FWWgOw5WVrFMYEyGCag1?pid=ImgGn',
+                  )
+                : AssetImage(course.imageUrl) as ImageProvider<Object>,
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
     );
   }
 }
