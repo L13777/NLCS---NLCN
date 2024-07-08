@@ -11,6 +11,7 @@ class HomePage extends StatelessWidget {
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
+            // nghĩ cách chỉnh sửa lại để có thể dùng listview cho tiện
             Column(
               children: [
                 Padding(
@@ -22,12 +23,12 @@ class HomePage extends StatelessWidget {
                       Text(
                         'Lập trình căn bản',
                         style: TextStyle(
-                            fontSize: 16, decoration: TextDecoration.none),
+                            fontSize: 17, decoration: TextDecoration.none),
                       ),
                       Text(
                         'Xem thêm',
                         style: TextStyle(
-                            fontSize: 14, decoration: TextDecoration.none),
+                            fontSize: 15, decoration: TextDecoration.none),
                       ),
                     ],
                   ),
@@ -46,12 +47,12 @@ class HomePage extends StatelessWidget {
                       Text(
                         'Lập trình hướng đối tượng',
                         style: TextStyle(
-                            fontSize: 16, decoration: TextDecoration.none),
+                            fontSize: 17, decoration: TextDecoration.none),
                       ),
                       Text(
                         'Xem thêm',
                         style: TextStyle(
-                            fontSize: 14, decoration: TextDecoration.none),
+                            fontSize: 15, decoration: TextDecoration.none),
                       ),
                     ],
                   ),
@@ -70,12 +71,12 @@ class HomePage extends StatelessWidget {
                       Text(
                         'Phân tích và thiết kế thuật toán',
                         style: TextStyle(
-                            fontSize: 16, decoration: TextDecoration.none),
+                            fontSize: 17, decoration: TextDecoration.none),
                       ),
                       Text(
                         'Xem thêm',
                         style: TextStyle(
-                            fontSize: 14, decoration: TextDecoration.none),
+                            fontSize: 15, decoration: TextDecoration.none),
                       ),
                     ],
                   ),

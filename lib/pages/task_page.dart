@@ -15,11 +15,19 @@ class _TaskPageState extends State<TaskPage> {
   final _controller = TextEditingController();
   final TaskManager taskManager = TaskManager();
 
-  // function to change checkbox
+  // function to change checkbox // chỉnh sửa lại chút
   void checkBoxChanged(bool? value, int index) {
     setState(() {
       taskManager.checkTask(index);
     });
+
+    if (value == true) {
+      Future.delayed(const Duration(milliseconds: 1000), () {
+        setState(() {
+          taskManager.deleteTask(index);
+        });
+      });
+    }
   }
 
   // save new task
@@ -44,8 +52,6 @@ class _TaskPageState extends State<TaskPage> {
       },
     );
   }
-
-  // function to delete Task
 
   /* tìm cách để khi người dùng bấm xong sẽ trượt qua 
   và tự xoá ngoài ra có thể hoàn lại hành động này */
